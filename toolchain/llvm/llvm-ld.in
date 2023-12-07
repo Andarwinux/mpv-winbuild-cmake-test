@@ -2,9 +2,10 @@
 PROG=@CMAKE_INSTALL_PREFIX@/bin/ld.lld
 TARGET=@TARGET_ARCH@
 FLAGS="-m @ld_m_flag@"
-FLAGS="$FLAGS @opt@"
+FLAGS="$FLAGS @opt@ @lld_cfi@"
 FLAGS="$FLAGS --pdb="
 FLAGS="$FLAGS -O3 -Xlink=-opt:lldlto=3 -Xlink=-opt:lldltocgo=3"
+FLAGS="$FLAGS --no-insert-timestamp --major-os-version=10 --major-subsystem-version=6 --minor-subsystem-version=2 --file-alignment=4096"
 
 if [ "$CONF" == "1" ]; then
     SKIP_OPT="-O0 -Xlink=-opt:lldlto=0 -Xlink=-opt:lldltocgo=0 --no-gc-sections --no-guard-cf"
